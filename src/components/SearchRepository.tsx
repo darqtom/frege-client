@@ -15,6 +15,7 @@ const SearchRepository = () => {
     []
   );
   const [searchExpression, setSearchExpression] = useState("");
+  const [loading, setLoading] = useState(false);
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   const search = useCallback(
@@ -27,14 +28,16 @@ const SearchRepository = () => {
       } else {
         await updateSearchResults(searchExpression, softwareHosting);
       }
+      setLoading(false);
     },
     []
   );
 
   const debounceSearch = useMemo(() => {
     return _.debounce((searchExpression: string, softwareHosting: string) => {
+      setLoading(true);
       search(searchExpression, softwareHosting);
-    }, 500);
+    }, 300);
   }, [search]);
 
   useEffect(() => {
@@ -50,12 +53,14 @@ const SearchRepository = () => {
   const onSoftwareHostingChange = async (
     event: React.ChangeEvent<HTMLSelectElement>
   ): Promise<void> => {
+    setSearchResults([]);
     setSoftwareHosting(event.target.value);
   };
 
   const onSearchExpressionChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
+    setSearchResults([]);
     setSearchExpression(event.target.value);
   };
 
@@ -65,6 +70,7 @@ const SearchRepository = () => {
   };
 
   const onClear = (): void => {
+    setSearchResults([]);
     setSearchExpression("");
   };
 
@@ -92,6 +98,7 @@ const SearchRepository = () => {
       placeholder={`Enter a URL to ${softwareHosting} repository, or search by name`}
       ref={inputRef}
       value={searchExpression}
+      loading={loading}
     >
       <Dropdown
         options={SOFTWARE_HOSTINGS}

@@ -2,6 +2,7 @@ import React from "react";
 import { SearchIcon, XIcon } from "@heroicons/react/outline";
 import { SearchRepositoryResult } from "../models/SearchRepositoryResult";
 import SearchItem from "./SearchItem";
+import Spinner from "./Spinner";
 
 type SearchProps = {
   onChange(event: React.ChangeEvent<HTMLInputElement>): any;
@@ -10,6 +11,7 @@ type SearchProps = {
   results: SearchRepositoryResult[];
   placeholder: string;
   value: string;
+  loading: boolean;
 };
 
 const Search = React.forwardRef<
@@ -17,7 +19,16 @@ const Search = React.forwardRef<
   React.PropsWithChildren<SearchProps>
 >(
   (
-    { children, onChange, onItemClick, onClear, results, placeholder, value },
+    {
+      children,
+      onChange,
+      onItemClick,
+      onClear,
+      results,
+      placeholder,
+      value,
+      loading,
+    },
     ref
   ) => {
     const childrenElement = children ? (
@@ -44,6 +55,7 @@ const Search = React.forwardRef<
           )}
           <div className="">{childrenElement}</div>
         </div>
+        {loading && <Spinner />}
         {results && results.length > 0 && (
           <div className="mt-4">
             <ul className="max-h-80 overflow-scroll">
