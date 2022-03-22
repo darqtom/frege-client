@@ -1,7 +1,12 @@
 import React from "react";
+import SearchRepository from "./SearchRepository";
 
-function App() {
-  return <div></div>;
-}
+const App = () => {
+  return (
+    <div>
+      <SearchRepository />
+    </div>
+  );
+};
 
 export default App;
