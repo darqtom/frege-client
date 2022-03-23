@@ -36,11 +36,11 @@ const Search = React.forwardRef<
     ) : null;
 
     return (
-      <div className="border border-gray-500 py-4 m-10 rounded-md">
+      <div className=" bg-white py-4 rounded-lg shadow-md shadow-gray-300">
         <div className="flex px-4">
           <SearchIcon className="w-6 h-6 text-green-600" />
           <input
-            className="flex-1 mx-4 text-gray-800 outline-none placeholder-gray-800 placeholder-opacity-75"
+            className="flex-1 mx-4 text-gray-800 outline-none placeholder-gray-800 placeholder-opacity-75 truncate"
             type="text"
             onChange={onChange}
             placeholder={placeholder}

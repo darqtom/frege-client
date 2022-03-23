@@ -37,7 +37,7 @@ const SearchRepository = () => {
     return _.debounce((searchExpression: string, softwareHosting: string) => {
       setLoading(true);
       search(searchExpression, softwareHosting);
-    }, 300);
+    }, 750);
   }, [search]);
 
   useEffect(() => {
