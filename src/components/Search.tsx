@@ -36,7 +36,7 @@ const Search = React.forwardRef<
     ) : null;
 
     return (
-      <div className=" bg-white py-4 rounded-lg shadow-md shadow-gray-300">
+      <div className="fixed search whiteBox py-4 ">
         <div className="flex px-4">
           <SearchIcon className="w-6 h-6 text-green-600" />
           <input

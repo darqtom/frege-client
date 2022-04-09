@@ -1,13 +1,21 @@
 import React from "react";
+import Metrics from "./Metrics";
+import RepositoryGraph from "./RepositoryGraph";
 import SearchRepository from "./SearchRepository";
 import Sidebar from "./Sidebar";
 
 const App = () => {
   return (
-    <div className="grid grid-cols-12">
-      <Sidebar />
-      <div className="col-start-1 col-end-13 mt-[5.5rem] mx-4 md:mt-4 md:col-start-3 md:col-end-11 xl:col-start-4 xl:col-end-10">
+    <div className="bg-gray-100 flex-col h-screen">
+      <div className="flex flex-col md:flex-row w-full mx-auto h-full">
         <SearchRepository />
+        <Sidebar />
+        <div className="flex h-[33%] repositoryGraphContainer">
+          <RepositoryGraph />
+        </div>
+        <div className="flex h-[67%] metricsContainer">
+          <Metrics />
+        </div>
       </div>
     </div>
   );

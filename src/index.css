@@ -2,8 +2,90 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-color: #f1f1f1;
+* {
+  box-sizing: border-box;
+}
+
+@layer components {
+  .whiteBox {
+    @apply bg-white rounded-lg shadow-md shadow-gray-300;
+  }
+
+  .showSidebar {
+    @apply translate-x-0 opacity-100 z-20 pointer-events-auto;
+  }
+
+  .hideSidebar {
+    @apply -translate-x-full opacity-0 z-10 pointer-events-none;
+  }
+
+  .showMenu {
+    @apply z-20 opacity-100 pointer-events-auto sm:w-menu;
+  }
+
+  .hideMenu {
+    @apply z-10 opacity-0 pointer-events-none w-full md:w-[calc(0.4*(100%-3*theme('margin.base'))-theme('margin.base'))] lg:w-[calc(0.2*(100%-3*theme('margin.base'))-theme('margin.base'))];
+  }
+
+  .transitionAll {
+    @apply transition-all ease-in-out duration-500;
+  }
+
+  .search {
+    @apply mt-[calc(theme('margin.base')+theme('height.menu'))] ml-4 w-[calc(100%-2rem)];
+  }
+
+  .sidebar {
+    @apply w-full h-full;
+  }
+
+  .repositoryGraphContainer {
+    @apply ml-base mr-base mt-[calc(1*theme('margin.base')+2*theme('height.menu'))] mb-base;
+  }
+
+  .metricsContainer {
+    @apply ml-base mr-base mb-base;
+  }
+}
+
+@screen md {
+  .repositoryGraphContainer {
+    @apply flex-col ml-base w-[calc(50%)] mt-[calc(theme('margin.base')+theme('height.menu'))] h-[calc(100%-2*theme('margin.base')-theme('height.menu'))];
+  }
+
+  .metricsContainer {
+    @apply ml-0 flex-col w-[calc(50%)] mt-[calc(theme('margin.base')+theme('height.menu'))] h-[calc(100%-2*theme('margin.base')-theme('height.menu'))];
+  }
+
+  .search {
+    @apply mt-base ml-[calc(40%+theme('margin.base'))] w-[calc(60%-2*theme('margin.base'))];
+  }
+
+  .sidebar {
+    @apply w-[40%];
+  }
+}
+
+@screen lg {
+  .sidebarContainer {
+    @apply w-[20%];
+  }
+
+  .repositoryGraphContainer {
+    @apply w-[40%] ml-[calc(20%+theme('margin.base'))];
+  }
+
+  .metricsContainer {
+    @apply w-[40%];
+  }
+
+  .search {
+    @apply ml-[calc(20%+theme('margin.base'))] w-[calc(60%-theme('margin.base'))];
+  }
+
+  .sidebar {
+    @apply w-[20%];
+  }
 }
 
 html {
