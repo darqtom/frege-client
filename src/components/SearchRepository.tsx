@@ -1,11 +1,14 @@
 import React, { useState, useCallback, useEffect, useMemo } from "react";
+import { useDispatch } from "react-redux";
+import _ from "lodash";
+import validator from "validator";
+
 import Dropdown from "./Dropdown";
 import Search from "./Search";
 import { fetchSearchResults } from "../services/search-repository.service";
-import _ from "lodash";
-import validator from "validator";
 import { SearchRepositoryResult } from "../models/SearchRepositoryResult";
-import { fetchRepositoryMetrics } from "../services/metrics.service";
+import { fetchRepositoryThunk } from "../store/slices/repository";
+import { AppDispatch } from "../store/store";
 
 const SOFTWARE_HOSTINGS = ["github", "gitlab", "sourceforge", "bitbucket"];
 
@@ -17,15 +20,14 @@ const SearchRepository = () => {
   const [searchExpression, setSearchExpression] = useState("");
   const [loading, setLoading] = useState(false);
   const inputRef = React.useRef<HTMLInputElement>(null);
+  const dispatch: AppDispatch = useDispatch();
 
   const search = useCallback(
     async (
       searchExpression: string,
       softwareHosting: string
     ): Promise<void> => {
-      if (validator.isURL(searchExpression)) {
-        await fetchRepositoryMetrics();
-      } else {
+      if (!validator.isURL(searchExpression)) {
         await updateSearchResults(searchExpression, softwareHosting);
       }
       setLoading(false);
@@ -66,6 +68,7 @@ const SearchRepository = () => {
 
   const onItemClick = async (repoURL: string): Promise<void> => {
     setSearchResults([]);
+    dispatch(fetchRepositoryThunk("bla"));
     setSearchExpression(repoURL);
   };
 

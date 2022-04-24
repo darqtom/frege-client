@@ -12,19 +12,19 @@
   }
 
   .showSidebar {
-    @apply translate-x-0 opacity-100 z-20 pointer-events-auto;
+    @apply translate-x-0 opacity-100 z-[1100] pointer-events-auto;
   }
 
   .hideSidebar {
-    @apply -translate-x-full opacity-0 z-10 pointer-events-none;
+    @apply -translate-x-full opacity-0 pointer-events-none;
   }
 
   .showMenu {
-    @apply z-20 opacity-100 pointer-events-auto sm:w-menu;
+    @apply opacity-100 pointer-events-auto sm:w-menu;
   }
 
   .hideMenu {
-    @apply z-10 opacity-0 pointer-events-none w-full md:w-[calc(0.4*(100%-3*theme('margin.base'))-theme('margin.base'))] lg:w-[calc(0.2*(100%-3*theme('margin.base'))-theme('margin.base'))];
+    @apply opacity-0 pointer-events-none w-full md:w-[calc(0.4*(100%-3*theme('margin.base'))-theme('margin.base'))] lg:w-[calc(0.2*(100%-3*theme('margin.base'))-theme('margin.base'))];
   }
 
   .transitionAll {

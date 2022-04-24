@@ -1,5 +1,6 @@
 import React from "react";
 import { SearchIcon, XIcon } from "@heroicons/react/outline";
+
 import { SearchRepositoryResult } from "../models/SearchRepositoryResult";
 import SearchItem from "./SearchItem";
 import Spinner from "./Spinner";
@@ -36,9 +37,12 @@ const Search = React.forwardRef<
     ) : null;
 
     return (
-      <div className="fixed search whiteBox py-4 ">
+      <div className="fixed search whiteBox py-4 z-[1100]">
         <div className="flex px-4">
-          <SearchIcon className="w-6 h-6 text-green-600" />
+          <SearchIcon
+            onClick={() => onItemClick(value)}
+            className="w-6 h-6 text-green-600 cursor-pointer"
+          />
           <input
             className="flex-1 mx-4 text-gray-800 outline-none placeholder-gray-800 placeholder-opacity-75 truncate"
             type="text"
@@ -58,7 +62,7 @@ const Search = React.forwardRef<
         {loading && <Spinner />}
         {results && results.length > 0 && (
           <div className="mt-4">
-            <ul className="max-h-80 overflow-scroll">
+            <ul className="max-h-80 overflow-y-scroll">
               {results.map((result) => (
                 <SearchItem
                   key={result.httpURL}
