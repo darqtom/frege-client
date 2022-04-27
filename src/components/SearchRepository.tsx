@@ -68,7 +68,7 @@ const SearchRepository = () => {
 
   const onItemClick = async (repoURL: string): Promise<void> => {
     setSearchResults([]);
-    dispatch(fetchRepositoryThunk("bla"));
+    dispatch(fetchRepositoryThunk(repoURL));
     setSearchExpression(repoURL);
   };
 

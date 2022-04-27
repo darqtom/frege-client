@@ -6,7 +6,7 @@ export async function fetchRepository(url: string) {
   const { data } = await axios.get<RepositoryResult[]>(
     "http://localhost:8080/repositories",
     {
-      data: {
+      params: {
         url: url,
       },
     }
