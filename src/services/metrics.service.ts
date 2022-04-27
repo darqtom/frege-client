@@ -1,13 +1,21 @@
 import axios from "axios";
 
+import { RepositoryResult } from "../models/RepositoryResult";
+
 export async function fetchRepository(url: string) {
-  return await axios({
-    method: "get",
-    url: "http://localhost:8080/repositories",
-    data: {
-      url: url,
-    },
-  });
+  try {
+    const { data } = await axios.get<RepositoryResult[]>(
+      "http://localhost:8080/repositories",
+      {
+        data: {
+          url: url,
+        },
+      }
+    );
+    return data;
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 export async function fetchRepositoryMetrics() {
