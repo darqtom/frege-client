@@ -3,8 +3,8 @@ module.exports = {
   theme: {
     extend: {
       height: {
-        search: "4.5rem",
-        menu: "4.5rem",
+        search: "4rem",
+        menu: "4rem",
       },
       width: {
         sidebar: "10rem",

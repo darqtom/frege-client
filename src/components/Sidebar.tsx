@@ -19,7 +19,7 @@ const Sidebar = () => {
         >
           <div className="flex items-center">
             <XIcon className="w-6 h-6 text-gray-400  group-hover:text-violet-400" />
-            <span className="ml-2 text=gray-800 group-hover:text-violet-500">
+            <span className="ml-2 text-sm text=gray-800 group-hover:text-violet-500">
               Close
             </span>
           </div>
@@ -27,12 +27,10 @@ const Sidebar = () => {
       </div>
       <div
         className={`fixed top-4 left-4 h-full ${
-          sidebarVisible
-            ? "hideMenu"
-            : "showMenu"
+          sidebarVisible ? "hideMenu" : "showMenu"
         } transitionAll`}
       >
-        <div className="whiteBox flex items-center justify-evenly w-auto py-4 px-4 group cursor-pointer">
+        <div className="whiteBox flex items-center justify-evenly w-auto py-3 px-4 group cursor-pointer">
           <Logo />
           <MenuIcon
             className="w-6 h-6 text-gray-400 group-hover:scale-110  group-hover:text-gray-600 transition-transform transition-color"

@@ -1,10 +1,12 @@
-import { RepositoryResult } from "../models/RepositoryResult";
+import axios from "axios";
 
-export async function fetchRepository(
-  url: string
-): Promise<RepositoryResult[]> {
-  return new Promise((resolve) => {
-    resolve([]);
+export async function fetchRepository(url: string) {
+  return await axios({
+    method: "get",
+    url: "http://localhost:8080/repositories",
+    data: {
+      url: url,
+    },
   });
 }
 

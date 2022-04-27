@@ -19,7 +19,7 @@ const Dropdown: React.FunctionComponent<DropdownProps> = ({
         name={name}
         id={id}
         onChange={onChange}
-        className="outline-none text-center text-gray-800 cursor-pointer"
+        className="outline-none text-center text-sm text-gray-800 cursor-pointer"
       >
         {options.map((option) => (
           <option key={option} value={option}>

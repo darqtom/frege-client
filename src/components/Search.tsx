@@ -37,14 +37,14 @@ const Search = React.forwardRef<
     ) : null;
 
     return (
-      <div className="fixed search whiteBox py-4 z-[1100]">
+      <div className="fixed search whiteBox py-3 z-[1100]">
         <div className="flex px-4">
           <SearchIcon
             onClick={() => onItemClick(value)}
             className="w-6 h-6 text-green-600 cursor-pointer"
           />
           <input
-            className="flex-1 mx-4 text-gray-800 outline-none placeholder-gray-800 placeholder-opacity-75 truncate"
+            className="flex-1 mx-4 text-sm text-gray-800 outline-none placeholder-gray-800 placeholder-opacity-75 truncate"
             type="text"
             onChange={onChange}
             placeholder={placeholder}

@@ -18,8 +18,8 @@ const SearchItem: React.FunctionComponent<SearchItemProps> = ({
       className="flex flex-col px-4 py-2 hover:bg-violet-50 cursor-pointer"
       onClick={() => onClick(url)}
     >
-      <p className="text-md text-gray-800">{name}</p>
-      <p className="text-sm text-gray-400">{description || "No description"}</p>
+      <p className="text-sm text-gray-800">{name}</p>
+      <p className="text-xs text-gray-400">{description || "No description"}</p>
     </div>
   );
 };
