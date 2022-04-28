@@ -1,7 +1,7 @@
 export interface SearchRepositoryResult {
   description: string;
   name: string;
-  httpURL: string;
+  cloneURL: string;
   sshURL: string;
 }
 
@@ -20,6 +20,7 @@ export interface SearchGitHubRepositoryResult {
     ssh_url: string;
     created_at: string;
     updated_at: string;
+    clone_url: string;
   }[];
 }
 

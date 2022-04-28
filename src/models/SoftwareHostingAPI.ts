@@ -25,7 +25,7 @@ export class GitHubAPI extends SoftwareHostingAPI {
       const repos: SearchRepositoryResult[] = resultData.items.map((repo) => ({
         description: repo.description,
         name: repo.full_name,
-        httpURL: repo.url,
+        cloneURL: repo.clone_url,
         sshURL: repo.ssh_url,
       }));
       return repos;
@@ -51,7 +51,7 @@ export class GitLabAPI extends SoftwareHostingAPI {
       const repos: SearchRepositoryResult[] = resultData.map((repo) => ({
         description: repo.description,
         name: repo.path_with_namespace,
-        httpURL: repo.http_url_to_repo,
+        cloneURL: repo.http_url_to_repo,
         sshURL: repo.ssh_url_to_repo,
       }));
       return repos;

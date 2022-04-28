@@ -65,10 +65,10 @@ const Search = React.forwardRef<
             <ul className="max-h-80 overflow-y-scroll">
               {results.map((result) => (
                 <SearchItem
-                  key={result.httpURL}
+                  key={result.cloneURL}
                   name={result.name}
                   description={result.description}
-                  url={result.httpURL}
+                  url={result.cloneURL}
                   onClick={onItemClick}
                 />
               ))}
