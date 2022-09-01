@@ -20,7 +20,7 @@
   }
 
   .showMenu {
-    @apply opacity-100 pointer-events-auto sm:w-menu;
+    @apply opacity-100 z-0 pointer-events-auto sm:w-menu;
   }
 
   .hideMenu {
@@ -40,11 +40,11 @@
   }
 
   .repositoryGraphContainer {
-    @apply ml-base mr-base mt-[calc(1*theme('margin.base')+2*theme('height.menu'))] mb-base;
+    @apply z-10 ml-base mr-base mt-[calc(1*theme('margin.base')+2*theme('height.menu'))] mb-base;
   }
 
   .metricsContainer {
-    @apply ml-base mr-base mb-base;
+    @apply z-10 ml-base mr-base mb-base;
   }
 }
 
