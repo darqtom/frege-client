@@ -2,10 +2,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import Metrics from "./Metrics";
-import RepositoryGraph from "./RepositoryGraph";
-import SearchRepository from "./SearchRepository";
-import Sidebar from "./Sidebar";
-import { selectRepository } from "../store/selectors";
+import RepositoryGraph from "components/RepositoryPreview/RepositoryGraph/RepositoryGraph";
+import SearchRepository from "components/SearchRepository";
+import Sidebar from "components/Sidebar";
+import { selectRepository } from "store/selectors";
 
 const App = () => {
   const { branches, status, error } = useSelector(selectRepository);

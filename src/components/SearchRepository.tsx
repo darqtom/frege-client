@@ -3,12 +3,12 @@ import { useDispatch } from "react-redux";
 import _ from "lodash";
 import validator from "validator";
 
-import Dropdown from "./Dropdown";
-import Search from "./Search";
-import { fetchSearchResults } from "../services/search-repository.service";
-import { SearchRepositoryResult } from "../models/SearchRepositoryResult";
-import { fetchRepositoryThunk } from "../store/slices/repository";
-import { AppDispatch } from "../store/store";
+import Dropdown from "components/Dropdown";
+import Search from "components/Search";
+import { fetchSearchResults } from "services/search-repository.service";
+import { SearchRepositoryResult } from "models/SearchRepositoryResult";
+import { fetchRepositoryThunk } from "store/slices/repository";
+import { AppDispatch } from "store/store";
 
 const SOFTWARE_HOSTINGS = ["github", "gitlab", "sourceforge", "bitbucket"];
 

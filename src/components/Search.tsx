@@ -1,9 +1,9 @@
 import React from "react";
 import { SearchIcon, XIcon } from "@heroicons/react/outline";
 
-import { SearchRepositoryResult } from "../models/SearchRepositoryResult";
-import SearchItem from "./SearchItem";
-import Spinner from "./Spinner";
+import { SearchRepositoryResult } from "models/SearchRepositoryResult";
+import SearchItem from "components/SearchItem";
+import Spinner from "components/Spinner";
 
 type SearchProps = {
   onChange(event: React.ChangeEvent<HTMLInputElement>): any;
