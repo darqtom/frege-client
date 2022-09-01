@@ -13,7 +13,10 @@ module.exports = {
       spacing: {
         base: "1rem",
       },
+      transitionProperty: {
+        height: "height",
+      },
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar-hide")],
 };
