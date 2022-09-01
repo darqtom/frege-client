@@ -3,6 +3,7 @@ export interface CommitResult {
   time: number;
   sha: string;
   parents: string[];
+  author: { nick: string };
 }
 export interface RepositoryResult {
   branchName: string;
