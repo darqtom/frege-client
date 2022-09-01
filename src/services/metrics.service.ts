@@ -1,13 +1,16 @@
 import axios from "axios";
 
-import { RepositoryResult } from "../models/RepositoryResult";
+import { RepositoryResult } from "models/RepositoryResult";
 
-export async function fetchRepository(url: string) {
+export async function fetchRepository(
+  name: string,
+  softwareHostingName: string
+) {
   const { data } = await axios.get<RepositoryResult[]>(
-    "http://localhost:8080/repositories",
+    `http://localhost:8080/${softwareHostingName}/repository`,
     {
       params: {
-        url: url,
+        repositoryName: name,
       },
     }
   );

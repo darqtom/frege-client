@@ -27,9 +27,7 @@ const SearchRepository = () => {
       searchExpression: string,
       softwareHosting: string
     ): Promise<void> => {
-      if (!validator.isURL(searchExpression)) {
-        await updateSearchResults(searchExpression, softwareHosting);
-      }
+      await updateSearchResults(searchExpression, softwareHosting);
       setLoading(false);
     },
     []
@@ -66,10 +64,13 @@ const SearchRepository = () => {
     setSearchExpression(event.target.value);
   };
 
-  const onItemClick = async (repoURL: string): Promise<void> => {
+  const onItemClick = async (
+    name: string,
+    softwareHostingName: string
+  ): Promise<void> => {
     setSearchResults([]);
-    dispatch(fetchRepositoryThunk(repoURL));
-    setSearchExpression(repoURL);
+    dispatch(fetchRepositoryThunk({ name, softwareHostingName }));
+    setSearchExpression(name);
   };
 
   const onClear = (): void => {
@@ -102,6 +103,7 @@ const SearchRepository = () => {
       ref={inputRef}
       value={searchExpression}
       loading={loading}
+      softwareHostingName={softwareHosting}
     >
       <Dropdown
         options={SOFTWARE_HOSTINGS}

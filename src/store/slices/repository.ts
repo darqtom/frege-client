@@ -12,11 +12,11 @@ const initialState: RepositoryState = {
 
 export const fetchRepositoryThunk = createAsyncThunk<
   RepositoryResult[],
-  string,
+  { name: string; softwareHostingName: string },
   { rejectValue: { message: string } }
->("repository/tree", async (url: string, thunkApi) => {
+>("repository/tree", async ({ name, softwareHostingName }, thunkApi) => {
   try {
-    return await fetchRepository(url);
+    return await fetchRepository(name, softwareHostingName);
   } catch (error) {
     return thunkApi.rejectWithValue({
       message: "Failed to fetch repository",

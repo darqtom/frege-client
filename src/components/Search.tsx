@@ -7,12 +7,13 @@ import Spinner from "components/Spinner";
 
 type SearchProps = {
   onChange(event: React.ChangeEvent<HTMLInputElement>): any;
-  onItemClick(repoURL: string): Promise<void>;
+  onItemClick(name: string, softwareHostingName: string): Promise<void>;
   onClear(): void;
   results: SearchRepositoryResult[];
   placeholder: string;
   value: string;
   loading: boolean;
+  softwareHostingName: string;
 };
 
 const Search = React.forwardRef<
@@ -29,6 +30,7 @@ const Search = React.forwardRef<
       placeholder,
       value,
       loading,
+      softwareHostingName,
     },
     ref
   ) => {
@@ -40,7 +42,7 @@ const Search = React.forwardRef<
       <div className="fixed search whiteBox py-3 z-[1100]">
         <div className="flex px-4">
           <SearchIcon
-            onClick={() => onItemClick(value)}
+            onClick={() => onItemClick(value, softwareHostingName)}
             className="w-6 h-6 text-green-600 cursor-pointer"
           />
           <input
@@ -68,8 +70,8 @@ const Search = React.forwardRef<
                   key={result.cloneURL}
                   name={result.name}
                   description={result.description}
-                  url={result.cloneURL}
                   onClick={onItemClick}
+                  softwareHostingName={softwareHostingName}
                 />
               ))}
             </ul>
