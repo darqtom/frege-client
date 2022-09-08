@@ -1,5 +1,11 @@
 import React, { useState, useCallback, useEffect, useMemo } from "react";
 import { useDispatch } from "react-redux";
+import {
+  Select,
+  MenuItem,
+  FormControl,
+  SelectChangeEvent,
+} from "@mui/material";
 import _ from "lodash";
 import validator from "validator";
 
@@ -19,6 +25,8 @@ const SearchRepository = () => {
   );
   const [searchExpression, setSearchExpression] = useState("");
   const [loading, setLoading] = useState(false);
+  const [shouldSearch, setShouldSearch] = useState(false);
+
   const inputRef = React.useRef<HTMLInputElement>(null);
   const dispatch: AppDispatch = useDispatch();
 
@@ -51,7 +59,7 @@ const SearchRepository = () => {
   }, [searchExpression, softwareHosting, debounceSearch]);
 
   const onSoftwareHostingChange = async (
-    event: React.ChangeEvent<HTMLSelectElement>
+    event: SelectChangeEvent
   ): Promise<void> => {
     setSearchResults([]);
     setSoftwareHosting(event.target.value);
@@ -68,14 +76,21 @@ const SearchRepository = () => {
     name: string,
     softwareHostingName: string
   ): Promise<void> => {
+    if (inputRef.current) {
+      inputRef.current.value = name;
+    }
+
     setSearchResults([]);
     dispatch(fetchRepositoryThunk({ name, softwareHostingName }));
-    setSearchExpression(name);
   };
 
   const onClear = (): void => {
     setSearchResults([]);
     setSearchExpression("");
+
+    if (inputRef.current) {
+      inputRef.current.value = "";
+    }
   };
 
   const updateSearchResults = async (
@@ -105,12 +120,25 @@ const SearchRepository = () => {
       loading={loading}
       softwareHostingName={softwareHosting}
     >
-      <Dropdown
-        options={SOFTWARE_HOSTINGS}
-        name="softwareHostings"
-        id="softwareHostings"
-        onChange={onSoftwareHostingChange}
-      />
+      <FormControl sx={{ minWidth: 120 }} fullWidth>
+        {/* <InputLabel id="branch-label">Branch</InputLabel> */}
+        <Select
+          sx={{
+            minWidth: 120,
+            height: 32,
+            fontSize: 16,
+            padding: 0,
+            letterSpacing: 0.5,
+          }}
+          id="software-hostings-select"
+          defaultValue={SOFTWARE_HOSTINGS[0]}
+          onChange={onSoftwareHostingChange}
+        >
+          {SOFTWARE_HOSTINGS.map((hosting) => (
+            <MenuItem value={hosting}>{hosting}</MenuItem>
+          ))}
+        </Select>
+      </FormControl>
     </Search>
   );
 };

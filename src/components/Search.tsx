@@ -1,5 +1,7 @@
 import React from "react";
-import { SearchIcon, XIcon } from "@heroicons/react/outline";
+import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
+
+import cx from "utils/cx";
 
 import { SearchRepositoryResult } from "models/SearchRepositoryResult";
 import SearchItem from "components/SearchItem";
@@ -39,9 +41,13 @@ const Search = React.forwardRef<
     ) : null;
 
     return (
-      <div className="fixed search whiteBox py-3 z-[1100]">
-        <div className="flex px-4">
-          <SearchIcon
+      <div
+        className={cx("fixed", "search", "whiteBox", "py-2", "z-[1100]", {
+          "shadow-2xl": results.length > 0,
+        })}
+      >
+        <div className="flex items-center px-4">
+          <MagnifyingGlassIcon
             onClick={() => onItemClick(value, softwareHostingName)}
             className="w-6 h-6 text-green-600 cursor-pointer"
           />
@@ -51,10 +57,9 @@ const Search = React.forwardRef<
             onChange={onChange}
             placeholder={placeholder}
             ref={ref}
-            value={value}
           />
           {value && (
-            <XIcon
+            <XMarkIcon
               className="w-6 h-6 text-gray-400 hover:text-gray-500 mr-2 cursor-pointer"
               onClick={onClear}
             />

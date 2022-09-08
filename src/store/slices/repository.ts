@@ -11,7 +11,7 @@ const initialState: RepositoryState = {
 };
 
 export const fetchRepositoryThunk = createAsyncThunk<
-  RepositoryResult[],
+  RepositoryResult,
   { name: string; softwareHostingName: string },
   { rejectValue: { message: string } }
 >("repository/tree", async ({ name, softwareHostingName }, thunkApi) => {
@@ -34,7 +34,7 @@ const repositorySlice = createSlice({
       state.error = null;
     });
     builder.addCase(fetchRepositoryThunk.fulfilled, (state, { payload }) => {
-      state.branches.push(...payload);
+      state.branches = payload.branches;
       state.status = "idle";
     });
     builder.addCase(fetchRepositoryThunk.rejected, (state, { payload }) => {

@@ -6,7 +6,7 @@ export async function fetchRepository(
   name: string,
   softwareHostingName: string
 ) {
-  const { data } = await axios.get<RepositoryResult[]>(
+  const { data } = await axios.get<RepositoryResult>(
     `http://localhost:8080/${softwareHostingName}/repository`,
     {
       params: {

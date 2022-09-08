@@ -1,4 +1,4 @@
-import { CommitResult, RepositoryResult } from "models/RepositoryResult";
+import { BranchResult, CommitPreview, CommitResult } from "models/RepositoryResult";
 
 export interface RootState {
   repository: RepositoryState;
@@ -6,11 +6,12 @@ export interface RootState {
 }
 
 export interface RepositoryState {
-  branches: RepositoryResult[];
+  branches: BranchResult[];
   status: "loading" | "idle";
   error: string | null;
 }
 
 export interface CommitsComparingState {
   selectedCommits: CommitResult[];
+  tmpSelectedCommits: CommitPreview[];
 }

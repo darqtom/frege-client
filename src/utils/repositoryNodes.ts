@@ -1,51 +1,61 @@
 import { Node, Edge, MarkerType, Position } from "react-flow-renderer";
 import dagre from "dagre";
 
-import { RepositoryResult } from "../models/RepositoryResult";
+import { BranchResult, CommitResult } from "../models/RepositoryResult";
 
 const defaultPosition = { x: 0, y: 0 };
 const defaultStyle = {
   width: "60px",
   height: "36px",
-  backgroundColor: "#16A34A",
-  color: "#ffffff",
+  color: "#222",
   opacity: 0.8,
 };
 
-export function prepareNodes(repositoryResults: RepositoryResult[]): {
+export function prepareNodes(
+  branch: BranchResult,
+  selectedCommits: CommitResult[]
+): {
   nodes: Node[];
   edges: Edge[];
 } {
   const nodes: Node[] = [];
   const edges: Edge[] = [];
 
-  repositoryResults.forEach((branch) => {
-    branch.commits.forEach((commit) => {
-      const node: Node = {
-        id: commit.sha,
-        data: {
-          label: commit.sha.slice(0, 5),
-        },
-        position: defaultPosition,
-        style: defaultStyle,
+  branch.commits.forEach((commit) => {
+    console.log("prepare nodes");
+    const isNodeSelected =
+      selectedCommits.findIndex(
+        (selectedCommit) => selectedCommit.sha === commit.sha
+      ) !== -1;
+
+    const backgroundColor = isNodeSelected ? "#1abc9c" : "#bdc3c7";
+
+    const node: Node = {
+      id: commit.sha,
+      data: {
+        commit: commit,
+        label: commit.sha.slice(0, 5),
+        selected: isNodeSelected
+      },
+      position: defaultPosition,
+      style: { ...defaultStyle, backgroundColor },
+    };
+
+    if (commit.parents.length === 0) {
+      node.type = "output";
+    }
+
+    nodes.push(node);
+
+    commit.parents.forEach((parent) => {
+      const edge: Edge = {
+        id: `e${commit.sha}-${parent.sha}`,
+        source: commit.sha,
+        target: parent.sha,
+        markerEnd: { type: MarkerType.ArrowClosed },
       };
 
-      if (commit.parents.length === 0) {
-        node.type = "output";
-      }
-
-      nodes.push(node);
-
-      commit.parents.forEach((parent) => {
-        const edge: Edge = {
-          id: `e${commit.sha}-${parent}`,
-          source: commit.sha,
-          target: parent,
-          markerEnd: { type: MarkerType.ArrowClosed },
-        };
-
-        edges.push(edge);
-      });
+      edges.push(edge);
     });
   });
 
