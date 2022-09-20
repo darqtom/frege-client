@@ -1,55 +1,45 @@
 import { Node, Edge, MarkerType, Position } from "react-flow-renderer";
 import dagre from "dagre";
 
-import { RepositoryResult } from "../models/RepositoryResult";
+import { BranchResult } from "../models/RepositoryResult";
 
 const defaultPosition = { x: 0, y: 0 };
-const defaultStyle = {
-  width: "60px",
-  height: "36px",
-  backgroundColor: "#16A34A",
-  color: "#ffffff",
-  opacity: 0.8,
-};
 
-export function prepareNodes(repositoryResults: RepositoryResult[]): {
-  nodes: Node[];
-  edges: Edge[];
-} {
+export function createNodesAndEdges(branch: BranchResult): [Node[], Edge[]] {
   const nodes: Node[] = [];
   const edges: Edge[] = [];
 
-  repositoryResults.forEach((branch) => {
-    branch.commits.forEach((commit) => {
-      const node: Node = {
-        id: commit.sha,
-        data: {
-          label: commit.sha.slice(0, 5),
-        },
-        position: defaultPosition,
-        style: defaultStyle,
+  branch.commits.forEach((commit) => {
+    const node: Node = {
+      id: commit.sha,
+      data: {
+        commit: commit,
+        label: commit.sha.slice(0, 5),
+      },
+      position: defaultPosition,
+      type: "commit",
+      selectable: false,
+    };
+
+    if (commit.parents.length === 0) {
+      node.type = "output";
+    }
+
+    nodes.push(node);
+
+    commit.parents.forEach((parent) => {
+      const edge: Edge = {
+        id: `e${commit.sha}-${parent.sha}`,
+        source: commit.sha,
+        target: parent.sha,
+        markerEnd: { type: MarkerType.ArrowClosed },
       };
 
-      if (commit.parents.length === 0) {
-        node.type = "output";
-      }
-
-      nodes.push(node);
-
-      commit.parents.forEach((parent) => {
-        const edge: Edge = {
-          id: `e${commit.sha}-${parent}`,
-          source: commit.sha,
-          target: parent,
-          markerEnd: { type: MarkerType.ArrowClosed },
-        };
-
-        edges.push(edge);
-      });
+      edges.push(edge);
     });
   });
 
-  return { nodes, edges };
+  return [nodes, edges];
 }
 
 export function placeNodesOnCanvas(
@@ -59,7 +49,7 @@ export function placeNodesOnCanvas(
   direction = "TB",
   nodeWidth: 60,
   nodeHeight: 36
-) {
+): [Node[], Edge[]] {
   const isHorizontal = direction === "LR";
   graph.setGraph({ rankdir: direction });
 
@@ -86,5 +76,5 @@ export function placeNodesOnCanvas(
     return node;
   });
 
-  return { nodes, edges };
+  return [nodes, edges];
 }
