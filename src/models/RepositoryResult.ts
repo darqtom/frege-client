@@ -1,11 +1,28 @@
 export interface CommitResult {
-  message: string;
+  commit: {
+    message: string;
+    author: {
+      name: string;
+    };
+  };
   time: number;
   sha: string;
-  parents: string[];
+  parents: { sha: string; url: string }[];
   author: { nick: string };
 }
+
+export interface CommitPreview extends CommitResult {
+  checked: boolean;
+}
+
+export interface BranchResult {
+  name: string;
+  commits: CommitResult[];
+}
+
 export interface RepositoryResult {
-  branchName: string;
+  branches: BranchResult[];
+  repositoryStatistics: any;
+  name: string;
   commits: CommitResult[];
 }

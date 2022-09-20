@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { RepositoryResult } from "../../models/RepositoryResult";
 
-import { RepositoryState } from "../../models/Store";
-import { fetchRepository } from "../../services/metrics.service";
+import { RepositoryResult } from "models/RepositoryResult";
+import { RepositoryState } from "models/Store";
+import { fetchRepository } from "services/metrics.service";
 
 const initialState: RepositoryState = {
   branches: [],
@@ -11,7 +11,7 @@ const initialState: RepositoryState = {
 };
 
 export const fetchRepositoryThunk = createAsyncThunk<
-  RepositoryResult[],
+  RepositoryResult,
   { name: string; softwareHostingName: string },
   { rejectValue: { message: string } }
 >("repository/tree", async ({ name, softwareHostingName }, thunkApi) => {
@@ -34,7 +34,7 @@ const repositorySlice = createSlice({
       state.error = null;
     });
     builder.addCase(fetchRepositoryThunk.fulfilled, (state, { payload }) => {
-      state.branches.push(...payload);
+      state.branches = payload.branches;
       state.status = "idle";
     });
     builder.addCase(fetchRepositoryThunk.rejected, (state, { payload }) => {
