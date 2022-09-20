@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
-import { ClipboardCopyIcon } from "@heroicons/react/outline";
+import { DocumentDuplicateIcon } from "@heroicons/react/24/outline";
 
 import { CommitResult } from "models/RepositoryResult";
 import { AppDispatch } from "store/store";
@@ -9,12 +9,12 @@ import { selectCommit, unselectCommit } from "store/slices/commitsComparing";
 interface RepositoryListItemProps {
   commit: CommitResult;
   isSelected: boolean | undefined;
-  compare: boolean;
+  select: boolean;
 }
 
 const RepositoryListItem = ({
   commit,
-  compare,
+  select,
   isSelected,
 }: RepositoryListItemProps) => {
   const dispatch: AppDispatch = useDispatch();
@@ -34,7 +34,7 @@ const RepositoryListItem = ({
   };
 
   const onItemClick = () => {
-    if (compare) {
+    if (select) {
       if (isSelected) {
         dispatch(unselectCommit(commit));
       } else {
@@ -46,10 +46,8 @@ const RepositoryListItem = ({
   };
 
   const {
-    message,
-    author: { nick },
+    commit: { message, author },
     sha,
-    time,
   } = commit;
 
   return (
@@ -57,8 +55,8 @@ const RepositoryListItem = ({
       className="flex hover:bg-violet-50 cursor-pointer py-2 px-4"
       onClick={onItemClick}
     >
-      <div className="flex w-1/2 items-center">
-        {compare && (
+      <div className="flex w-2/3 items-center">
+        {select && (
           <div className="checkbox mr-4">
             <input
               type="checkbox"
@@ -71,20 +69,20 @@ const RepositoryListItem = ({
         <div className="flex-col w-full">
           <p className="truncate text-sm">{message}</p>
           <div>
-            <span className="text-xs mr-1 font-semibold">{nick}</span>
-            <span className="text-xs">committed {time} ago</span>
+            <span className="text-xs mr-1 font-semibold">{author.name}</span>
+            <span className="text-xs">committed 1 hour ago</span>
           </div>
         </div>
       </div>
 
       <div className="flex w-1/2 justify-end items-center">
         <div>
-          <ClipboardCopyIcon
+          <DocumentDuplicateIcon
             onClick={copyToClipboard}
             className="w-6 h-6 text-gray-400 hover:text-gray-500 cursor-pointer"
           />
         </div>
-        <p className="px-2 w-16">{sha.slice(0, 7)}</p>
+        <p className="px-2 w-16 text-sm">{sha.slice(0, 7)}</p>
       </div>
     </div>
   );

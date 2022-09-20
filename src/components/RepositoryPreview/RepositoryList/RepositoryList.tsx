@@ -1,24 +1,23 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { CommitResult, RepositoryResult } from "models/RepositoryResult";
+import { BranchResult, CommitResult } from "models/RepositoryResult";
 import { selectCommitsComparing } from "store/selectors";
 import RepositoryListItem from "components/RepositoryPreview/RepositoryList/RepositoryListItem";
 
 interface RepositoryListProps {
-  branch: RepositoryResult;
-  compare: boolean;
+  branch: BranchResult;
+  select: boolean;
 }
 
 const RepositoryList = ({
   branch: { commits },
-  compare,
+  select,
 }: RepositoryListProps) => {
   const { selectedCommits } = useSelector(selectCommitsComparing);
 
   const isSelected = ({ sha }: CommitResult) => {
     const idx = selectedCommits.findIndex((commit) => commit.sha === sha);
-    console.log("is selected", sha, idx);
     return idx !== -1;
   };
 
@@ -27,7 +26,7 @@ const RepositoryList = ({
       {commits.map((commit) => (
         <RepositoryListItem
           commit={commit}
-          compare={compare}
+          select={select}
           isSelected={isSelected(commit)}
         />
       ))}

@@ -16,13 +16,13 @@ const RepositoryListView = ({ branches }: RepositoryListViewProps) => {
   const [branch, setBranch] = useState(branches[0]);
   const [compare, setCompare] = useState(false);
 
-  const options = branches.map((branch) => branch.branchName);
+  const options = branches.map((branch) => branch.name);
 
   const onBranchChange = async (
     event: React.ChangeEvent<HTMLSelectElement>
   ): Promise<void> => {
     const currentBranch =
-      branches.find((branch) => branch.branchName === event.target.value) ||
+      branches.find((branch) => branch.name === event.target.value) ||
       branches[0];
 
     setBranch(currentBranch);
@@ -63,7 +63,7 @@ const RepositoryListView = ({ branches }: RepositoryListViewProps) => {
               Compare
             </button>
           </div>
-          <RepositoryList compare={compare} branch={branch} />
+          <RepositoryList select={compare} branch={branch} />
         </div>
       </div>
     </>
