@@ -11,6 +11,10 @@
     @apply bg-white rounded-lg shadow-md shadow-gray-300;
   }
 
+  .greenBox {
+    @apply bg-green-600 text-white  rounded-lg;
+  }
+
   .showSidebar {
     @apply translate-x-0 opacity-100 z-[1100] pointer-events-auto;
   }
@@ -40,11 +44,11 @@
   }
 
   .repositoryGraphContainer {
-    @apply z-10 ml-base mr-base mt-[calc(1*theme('margin.base')+2*theme('height.menu'))] mb-base;
+    @apply z-0 ml-base mr-base mt-[calc(1*theme('margin.base')+2*theme('height.menu'))] mb-base;
   }
 
   .metricsContainer {
-    @apply z-10 ml-base mr-base mb-base;
+    @apply z-0 ml-base mr-base mb-base;
   }
 }
 
@@ -70,14 +74,15 @@
   .sidebarContainer {
     @apply w-[20%];
   }
+  /*
 
   .repositoryGraphContainer {
     @apply w-[40%] ml-[calc(20%+theme('margin.base'))];
   }
 
   .metricsContainer {
-    @apply w-[40%];
-  }
+    @apply w-[50%];
+  } */
 
   .search {
     @apply ml-[calc(20%+theme('margin.base'))] w-[calc(60%-theme('margin.base'))];

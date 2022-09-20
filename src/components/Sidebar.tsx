@@ -1,6 +1,7 @@
-import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import React, { useState } from "react";
-import Logo from "./Logo";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+
+import Logo from "components/Logo";
 
 const Sidebar = () => {
   const [sidebarVisible, setSidebarVisible] = useState(false);
@@ -18,7 +19,7 @@ const Sidebar = () => {
           onClick={() => setSidebarVisible(!sidebarVisible)}
         >
           <div className="flex items-center">
-            <XIcon className="w-6 h-6 text-gray-400  group-hover:text-violet-400" />
+            <XMarkIcon className="w-6 h-6 text-gray-400  group-hover:text-violet-400" />
             <span className="ml-2 text-sm text=gray-800 group-hover:text-violet-500">
               Close
             </span>
@@ -32,7 +33,7 @@ const Sidebar = () => {
       >
         <div className="whiteBox flex items-center justify-evenly w-auto py-3 px-4 group cursor-pointer">
           <Logo />
-          <MenuIcon
+          <Bars3Icon
             className="w-6 h-6 text-gray-400 group-hover:scale-110  group-hover:text-gray-600 transition-transform transition-color"
             onClick={() => setSidebarVisible(!sidebarVisible)}
           />
